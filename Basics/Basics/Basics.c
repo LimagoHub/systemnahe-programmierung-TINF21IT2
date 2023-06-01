@@ -1,45 +1,41 @@
 #include <stdio.h>
+#include <memory.h>
 
-void abc(double *myarray, size_t size)
+int string_lenght(char * text)
 {
-	for (int i = 0; i < size; ++i)
-	{
-		printf("%f\n",myarray[i]);
-	}
+	register int counter = 0; // Liegt nicht auf dem Stack, sondern in einem CPU-Register
+	while(text[counter]) counter++;
+	
+	return counter;
+}
+
+void string_copy(char * destination, const char * source)
+{
+	/*char *buffer = (char *) malloc(100 * sizeof(char));
+	memset(buffer,  'a', 10 * sizeof(char));
+	buffer[10] = 0;*/
+
+	while (*destination++ = *source++);
+
 	
 	
 }
 
-
 int main()
 {
-	//double x = 10.0;
-	//printf("%d\n", sizeof(x));
+	
+	char gruss[] = "Hallo";
+	printf("%d\n", sizeof(gruss));
 
-	//double *ptr; // Bei der Deklaration aendert * den Type 
-	//ptr = &x;
+	printf("%s\n", gruss);
+	printf("%d\n",string_lenght(gruss));
 
-	//printf("%d\n", sizeof(ptr));
-	//printf("%p\n", ptr);
+	char buffer[100];
+	
+	string_copy(buffer, gruss);
+	printf("%s\n", buffer);
 
-	//printf("%f\n", *ptr); // Zur Laufzeit dereferenziert der * (Liefert Wert an der Adresse)
-
-
-	double feld[]={10.0,20.0,30.0};
-	printf("%d\n", sizeof(feld));
-
-	printf("%f\n", feld[0]); // wert von feld + 0 mal sizeof(double)
-	double* ptr;
-	ptr = feld;
-	printf("%f\n", *ptr);
-	printf("%f\n", *feld);
-	printf("%f\n", ptr[0]);
-	printf("%f\n", ptr[1]);
-	printf("%f\n", *(ptr + 1));
-
-	printf("%d\n", sizeof(ptr));
-
-	abc(feld, sizeof(feld)/sizeof(double));
+	
 }
 
 
