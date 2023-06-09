@@ -11,25 +11,23 @@
 
 
 
-
-
-void doIt(char c) { // 1000
-	
-	usart_sendChar(c);
-}
-
-void bar(char c)  {
-	
-}
-double add(double a, double b)
+ISR (USART_RX_vect)
 {
-	return a + b;
+	usart_sendChar(UDR0);
 }
+
+//void doIt(char c) { // 1000
+	//
+	//usart_sendChar(c);
+//}
+
+
 
 int main( void )
 {
 	
-	usart_Init(doIt); // adresse 1000 wird übergeben (nur Point auf Funktion)
+	//usart_Init(doIt); // adresse 1000 wird übergeben (nur Point auf Funktion)
+	usart_Init(); // adresse 1000 wird übergeben (nur Point auf Funktion)
 	usart_sendStringNewLine("Hallo Welt");
 	while(1)
 	{

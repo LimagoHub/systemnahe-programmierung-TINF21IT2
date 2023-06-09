@@ -6,11 +6,11 @@
  */ 
 #include "usart.h"
 
-static volatile RECEIVER_FUNCTION callback; 
+//static volatile RECEIVER_FUNCTION callback; 
 
-void usart_Init(RECEIVER_FUNCTION myFunction) { // 1000 wird übergeben
+void usart_Init(/*RECEIVER_FUNCTION myFunction*/) { // 1000 wird übergeben
 	
-	callback = myFunction; // merken der Adresse (1000) in der callvariable;
+	//callback = myFunction; // merken der Adresse (1000) in der callvariable;
 	/*Set baud rate */
 	UBRR0H = (MYUBRR >> 8);
 	UBRR0L = MYUBRR;
@@ -22,7 +22,7 @@ void usart_Init(RECEIVER_FUNCTION myFunction) { // 1000 wird übergeben
 	sei();                                      // Lets not forget to enable interrupts =P
 }
 
-ISR (USART_RX_vect)
-{
-	callback(UDR0); // ruft indirekt doIt
-}
+//ISR (USART_RX_vect)
+//{
+	//callback(UDR0); // ruft indirekt doIt
+//}

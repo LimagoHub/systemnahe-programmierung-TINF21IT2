@@ -17,7 +17,7 @@
 #define MYUBRR F_CPU/16/BAUD -1
 
 
-typedef void (*RECEIVER_FUNCTION)(char);
+//typedef void (*RECEIVER_FUNCTION)(char);
 
 
 
@@ -40,7 +40,8 @@ inline void usart_sendStringNewLine(char *message) {
 	usart_sendString("\r\n");
 }
 
-void usart_Init(RECEIVER_FUNCTION myFunction) ;
+//void usart_Init(RECEIVER_FUNCTION myFunction) ;
+void usart_Init() ;
 
 
 
