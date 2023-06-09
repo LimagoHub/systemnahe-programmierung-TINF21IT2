@@ -1,35 +1,48 @@
-/*********************************************************************
+/*
+ * usart.h
+ *
+ * Created: 17.12.2021 09:55:36
+ *  Author: JoachimWagner
+ */ 
 
 
-	USART - API by Jo Wagner 
+#ifndef USART_H_
+#define USART_H_
+#include <avr/io.h>
+#include <stdint.h>                     // needed for uint8_t
+//#include <stdlib.h>
+#include <avr/interrupt.h>
+#define F_CPU 16000000UL                       // Clock Speed
+#define BAUD 9600
+#define MYUBRR F_CPU/16/BAUD -1
 
 
-**********************************************************************/
-
-#ifndef __JO_S_UART__
-	
-	#define __JO_S_LCD__
-
-	#ifndef F_CPU
-		#define F_CPU 16000000UL
-	#endif
+//typedef void (*RECEIVER_FUNCTION)(char);
 
 
-	//baud rate
-	#define BAUDRATE 57600
-	//berechne UBRR value
-	#define UBRRVAL ((F_CPU/(BAUDRATE*16UL))-1)
 
 
-	#include <avr/io.h>
-	#include <util/delay.h>
-	#include <avr/interrupt.h>
-	#include <avr/sleep.h>  
+inline void usart_sendChar(char value) {
+	while ( !(UCSR0A & (1 << UDRE0)) ) 
+	{									  
+		
+	}
+	UDR0 = value;
+}
 
-	void usart_init(void);
-	void usart_send(uint8_t);
-	void usart_send_string(char *);
-	uint8_t usart_receive();
+inline void usart_sendString(char *message) {
+	while(*message)
+		usart_sendChar(*message ++);
+}
 
-#endif
+inline void usart_sendStringNewLine(char *message) {
+	usart_sendString(message);
+	usart_sendString("\r\n");
+}
 
+//void usart_Init(RECEIVER_FUNCTION myFunction) ;
+void usart_Init() ;
+
+
+
+#endif /* USART_H_ */

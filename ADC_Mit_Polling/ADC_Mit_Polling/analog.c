@@ -26,7 +26,7 @@ uint16_t analog_read(uint8_t channel) {
 	
 	_delay_us(10);
 	
-	return ADCL  |= (ADCH << 8);
+	return ADCL  | (ADCH << 8);
 	
 	
 }
